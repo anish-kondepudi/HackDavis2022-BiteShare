@@ -2,18 +2,13 @@ import React from 'react';
 import logo from './images/logo.png'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const Navigation = () => {
 
   const userEmail = useSelector(state => state.email);
 
-  const resetLinkStyle = {
-    all: 'none'
-  };
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light color-nav">
       <a href="/"><img src={logo} width="50" height="30" className="d-inline-block align-top" alt=""/></a>
       <a className="navbar-brand" href="/">Bite Share</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,0 +1,16 @@
+:root {
+    --dark-blue: 212, 235, 242;
+    --light-blue: 232, 244, 248;
+  }
+
+body > * {
+    background-color: rgb(var(--light-blue));
+}
+
+html {
+    background-color: rgb(var(--light-blue));
+}
+
+.color-nav {
+    background-color: rgb(var(--dark-blue));
+}
