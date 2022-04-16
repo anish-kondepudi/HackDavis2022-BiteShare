@@ -39,12 +39,30 @@ app.get('/', function(req,res,next){
 =======
 let userModel=mongoose.model('users',userSchema);
 module.exports=function(app){
-    console.log("hi");
     app.get("/users", (req, res) => {
-        userModel.find().then(function(err, foundUser){
-            console.log(foundUser);
-            res.send(foundUser);
-        });
+        userModel.find({}, function(err, users) {
+            if (err) {
+                throw new Error(err)
+            } else {
+                var allUsers = {};
+
+                users.forEach(function(eachUser) {
+                  allUsers[eachUser._id] = eachUser;
+                });
+
+                res.send(allUsers); 
+            } 
+          });
+    });
+    app.get("/users/:email", (req, res) => {
+        const email = req.params.email;
+        userModel.find({email}, function(err, user) {
+            if (err) {
+                throw new Error(err)
+            } else {
+                res.send(user); 
+            } 
+          });
     });
     app.post("/addUser", (req, res) => {
         let newUser = req.body;
