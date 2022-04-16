@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 app.use(cors());
+app.use(mongoose());
 app.use(express.json());
 
 const url = "mongodb+srv://dbUser:IIpKZGMaDoVjPt9e@cluster0.lq8ew.mongodb.net/Cluster0?retryWrites=true&w=majority";
@@ -21,3 +22,5 @@ mongoose.connect(url).then(
         console.log("Error" + err);
     }
 );
+app.listen(PORT, () => `Server running on port ${PORT}`);
+
