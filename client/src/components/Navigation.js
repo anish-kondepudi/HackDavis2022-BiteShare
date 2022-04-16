@@ -1,24 +1,11 @@
 import React from 'react';
 import logo from './images/logo.png'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useSelector } from 'react-redux';
-=======
-import { useSelector, useDispatch } from 'react-redux';
-import { setEmail } from '../actions';
->>>>>>> 5675bb5 (Removed default redux & Added customer redux for login state)
 
 const Navigation = () => {
 
   const userEmail = useSelector(state => state.email);
 
-<<<<<<< HEAD
-=======
-
-const Navigation = () => {
->>>>>>> c3f2041 (Added Static Navbar)
-=======
->>>>>>> 5675bb5 (Removed default redux & Added customer redux for login state)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <img src={logo} width="50" height="30" className="d-inline-block align-top" alt=""/>
@@ -29,29 +16,26 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5675bb5 (Removed default redux & Added customer redux for login state)
           {userEmail ? <>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Donate</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Donate
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">New Donation</a>
+                <a class="dropdown-item" href="#">My Donations</a>
+              </div>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Pick Up</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Pick Up
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">See Map</a>
+                <a class="dropdown-item" href="#">See List</a>
+              </div>
             </li></> : ''
           }
-<<<<<<< HEAD
-=======
-          <li className="nav-item">
-            <a className="nav-link" href="#">Donate</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Pick Up</a>
-          </li>
->>>>>>> c3f2041 (Added Static Navbar)
-=======
->>>>>>> 5675bb5 (Removed default redux & Added customer redux for login state)
           <li className="nav-item">
             <a className="nav-link" href="#">About</a>
           </li>
@@ -60,8 +44,6 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse justify-content-end mr-5">
         <ul className="navbar-nav mr-auto">
-<<<<<<< HEAD
-<<<<<<< HEAD
           {userEmail ?<>
             <li className="nav-item">
               <a className="nav-link" href="#">Logout</a>
@@ -73,27 +55,6 @@ const Navigation = () => {
              <a className="nav-link" href="#">Register</a>
            </li></>
           }
-=======
-          <li className="nav-item">
-            <a className="nav-link" href="#">Login</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Register</a>
-          </li>
->>>>>>> c3f2041 (Added Static Navbar)
-=======
-          {userEmail ? <>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Login</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Register</a>
-            </li></> :
-            <><li className="nav-item">
-              <a className="nav-link" href="#">Logout</a>
-            </li></>
-          }
->>>>>>> 5675bb5 (Removed default redux & Added customer redux for login state)
         </ul>
       </div>
     </nav>
