@@ -13,9 +13,16 @@ const url = "mongodb+srv://dbUser:IIpKZGMaDoVjPt9e@cluster0.lq8ew.mongodb.net/Cl
 
 mongoose.connect(url).then(
     () => {
-        console.log("Connected! Now finding ... ");
-        app.listen(5000, () => {
-            console.log("Listening at port 5000!");
+        app.get('/', function(req,res,next){
+            mongoose.connect(url).then(
+                () => {
+                    let dbo = db.db("BiteShare");
+                    dbo.collection("Login_Table").find().then(users => res.json(users))
+                },
+                err => {
+                    console.log("Error" + err);
+                }
+            );
         });
     },
     err => {
@@ -23,6 +30,7 @@ mongoose.connect(url).then(
     }
 );
 
+<<<<<<< HEAD
 app.get('/', function(req,res,next){
     mongoose.connect(url).then(
         () => {
@@ -35,5 +43,7 @@ app.get('/', function(req,res,next){
     );
 });
 
+=======
+>>>>>>> b37ca6d (api user get)
 app.listen(PORT, () => `Server running on port ${PORT}`);
 
