@@ -1,7 +1,12 @@
 import React from 'react';
 import logo from './images/logo.png'
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail } from '../actions';
 
 const Navigation = () => {
+
+  const userEmail = useSelector(state => state.email);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <img src={logo} width="50" height="30" className="d-inline-block align-top" alt=""/>
@@ -12,12 +17,14 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Donate</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Pick Up</a>
-          </li>
+          {userEmail ? <>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Donate</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Pick Up</a>
+            </li></> : ''
+          }
           <li className="nav-item">
             <a className="nav-link" href="#">About</a>
           </li>
@@ -26,12 +33,17 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse justify-content-end mr-5">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Login</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Register</a>
-          </li>
+          {userEmail ? <>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Login</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Register</a>
+            </li></> :
+            <><li className="nav-item">
+              <a className="nav-link" href="#">Logout</a>
+            </li></>
+          }
         </ul>
       </div>
     </nav>
