@@ -7,7 +7,10 @@ const App = () => {
   return (
     <div className="App">
       <Navigation/>
+<<<<<<< HEAD
       <Login/>
+=======
+>>>>>>> c3f2041 (Added Static Navbar)
     </div>
   );
 }
