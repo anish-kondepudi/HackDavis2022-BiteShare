@@ -20,8 +20,6 @@ let userSchema= new mongoose.Schema({
     phoneNumber: String
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 app.get('/', function(req,res,next){
     mongoose.connect(url).then(
         () => {
@@ -34,9 +32,6 @@ app.get('/', function(req,res,next){
     );
 });
 
-=======
->>>>>>> b37ca6d (api user get)
-=======
 let userModel=mongoose.model('users',userSchema);
 module.exports=function(app){
     app.get("/users", (req, res) => {
@@ -75,15 +70,4 @@ module.exports=function(app){
         })
     });
 }
-/*app.get("/users", (req, res) => {
-    console.log("hi");
-    const data = userModel.find();
-    console.log(data);
-    res.send(data);
-});
-<<<<<<< HEAD
->>>>>>> e9949c6 (temp2)
-app.listen(PORT, () => `Server running on port ${PORT}`);
-=======
-*/
->>>>>>> fd67a27 (User post added)
+
