@@ -11,7 +11,8 @@ const Home = () => {
   
   return (
     <div className="Home">
-      Home Page
+      This is the homepage. Mock being logged in or logged out using buttons below.
+      <br/>
       <button onClick={() => {dispatch(setEmail("anish@gmail.com"))}}>login</button>
       <button onClick={() => {dispatch(setEmail(""))}}>logout</button>
     </div>
