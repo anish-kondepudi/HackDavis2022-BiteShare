@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './images/logo.png'
-import { useSelector, useDispatch } from 'react-redux';
-import { setEmail } from '../actions';
+import { useSelector } from 'react-redux';
 
 const Navigation = () => {
 
@@ -33,16 +32,16 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse justify-content-end mr-5">
         <ul className="navbar-nav mr-auto">
-          {userEmail ? <>
+          {userEmail ?<>
             <li className="nav-item">
-              <a className="nav-link" href="#">Login</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Register</a>
-            </li></> :
-            <><li className="nav-item">
               <a className="nav-link" href="#">Logout</a>
-            </li></>
+            </li></> :
+             <><li className="nav-item">
+             <a className="nav-link" href="#">Login</a>
+           </li>
+           <li className="nav-item">
+             <a className="nav-link" href="#">Register</a>
+           </li></>
           }
         </ul>
       </div>
