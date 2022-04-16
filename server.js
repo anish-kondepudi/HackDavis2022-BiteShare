@@ -21,3 +21,14 @@ mongoose.connect(url).then(
         console.log("Error" + err);
     }
 );
+app.get('/', function(req,res,next){
+    mongoose.connect(url).then(
+        () => {
+            let dbo = db.db("BiteShare");
+            dbo.collection("Login_Table").find().then(users => res.json(users))
+        },
+        err => {
+            console.log("Error" + err);
+        }
+    );
+});
