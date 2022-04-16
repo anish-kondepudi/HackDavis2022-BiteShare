@@ -53,13 +53,13 @@ const DonateGive = () => {
   return (
     <div className="DonateGive">
       <Form>
-          <div>
+          <div class = "FormInput">
             <Form.Group className="mb-3">
                 <Form.Label>Food Name</Form.Label>
                 <Form.Control type="text" placeholder="Food Name" onChange={handleFoodNameChange} />
             </Form.Group>
           </div>
-          <div>
+          <div class = "FormInput">
             <Form.Group className="mb-3">
                 <Form.Label>Food Description</Form.Label>
                 <Form.Control type="text" placeholder="Food Description" onChange={handleFoodDescChange} />
