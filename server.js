@@ -1,5 +1,5 @@
 const express = require('express');
-
+const router = express.Router();
 const app = express();
 const port= process.env.PORT || 5000;
 const cors = require('cors');
@@ -23,14 +23,4 @@ mongoose.connect(url).then(
         console.log("Error" + err);
     }
 );
-app.get('/', function(req,res,next){
-    mongoose.connect(url).then(
-        () => {
-            let dbo = db.db("BiteShare");
-            dbo.collection("Login_Table").find().then(users => res.json(users))
-        },
-        err => {
-            console.log("Error" + err);
-        }
-    );
-});
+app.use("/", router);
