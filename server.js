@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 
 app.use(cors());
 app.use(express.json());
-require('./backend')(app);
+require('./backend/foodInfo')(app);
+require('./backend/userInfo')(app);
 
 const url = "mongodb+srv://dbUser:IIpKZGMaDoVjPt9e@cluster0.lq8ew.mongodb.net/Cluster0?retryWrites=true&w=majority";
 
