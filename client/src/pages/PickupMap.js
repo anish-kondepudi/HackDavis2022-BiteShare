@@ -9,12 +9,15 @@ import {
 
 const PickupMap = (props) => {
 
-  const [lat, setLat] = useState(37.430759);
-  const [lng, setLng] = useState(-121.897507);
+  const [markers, setMarkers ] = useState([]);
 
-  console.log(lat, lng);
+  // Hard Coding 750 Orchard Rd, Davis, CA 95616
+  const [lat, setLat] = useState(38.543770);
+  const [lng, setLng] = useState(-121.761660);
 
+  // Fetch Live Location and Update Lat & Lng
   useEffect(() => {
+    // Fetch Live Location and Update Lat & Lng
     if (!navigator.geolocation) {
       console.error('Geolocation is not supported by your browser');
     } else {
@@ -25,17 +28,34 @@ const PickupMap = (props) => {
         console.error('Unable to retrieve your location');
       });
     }
+
+    // Grab Location Markers
+    console.log("hiii");
+    let url = 'http://localhost:5000/food/';
+    fetch(url).then(res => {
+      if(!res.ok){
+        console.log(res);
+        // throw res;
+      }
+      return res.json();
+    }).then(data => {
+      console.log(data);
+    });
+
   }, []);
 
   const libraries = ['places'];
+
   const mapContainerStyle = {
     width: '100vw',
     height: '100vh'
   }
+
   const center = {
     lat: lat,
     lng: lng
   }
+
   const options = {
     disableDefaultUI: true,
     zoomControl: true
