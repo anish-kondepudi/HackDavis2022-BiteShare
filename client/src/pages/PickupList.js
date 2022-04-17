@@ -100,7 +100,7 @@ const PickupList = () => {
               <div className="date">From: {popupCurrEmail}</div>
               <a href="#" onClick={() => {getFoodClicked()}} className="pull-right readmore">Pick Up</a>
             </div>
-            <div className="tile_footer"></div>
+            <div className="line_separator" ></div>
             {messageSent && <div className="date"> You have reserved this food! Check you text messages to get the address! </div>}
           </div>
         </div>
