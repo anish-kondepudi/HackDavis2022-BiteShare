@@ -25,6 +25,7 @@ const PickupMap = () => {
   const [popupCurrId, setPopupCurrId] = useState();
   const [popupCurrDesc, setPopupCurrDesc] = useState();
 
+  const [messageSent, setTextMessageSent] = useState(false);
   // Hard Coding 750 Orchard Rd, Davis, CA 95616
   const [lat, setLat] = useState(38.543770);
   const [lng, setLng] = useState(-121.761660);
