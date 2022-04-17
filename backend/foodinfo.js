@@ -30,7 +30,6 @@ const food = mongoose.model("foods", new Schema({
 
 
 module.exports = function(app){
-
     app.get("/food", (req, res) => {
         food.find({}, function(err, foods) {
             if (err) {
