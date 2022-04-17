@@ -156,26 +156,9 @@ const PickupMap = () => {
           })
       })
     })
-
-    /*
-    fetch("http://localhost:5000/pickup/" + popupCurrId, {
-        method: 'PUT', 
-        body: JSON.stringify({
-        donorPhoneNumber: 
-      })
-    }).then(res => res.json()).then(data => {
-      console.log("Data: " + data);
-    })*/
   }
 
   const cardClicked = (indFood) => {
-    console.log(indFood.img)
-    console.log(indFood.name);
-    console.log(indFood.email);
-    console.log(indFood.id);
-    console.log(indFood.description);
-
-
     setPopupCurrImgData(indFood.img)
     setPopupCurrName(indFood.name);
     setPopupCurrEmail(indFood.email);
@@ -236,33 +219,42 @@ const PickupMap = () => {
           position={{lat: selected.lat, lng: selected.lng }}
           onCloseClick={() => {setSelected(null)}}
         >
-          <div>
-            <h2>Food Popup</h2>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <img src={selected.img} id = "usersFood"></img>
-                <Card.Title>{selected.name}</Card.Title>
-                <Card.Text>
-                  Posted by: {selected.email}
-                </Card.Text>
-                <Card.Text>
-                  {selected.description}
-                </Card.Text>
-                <Button onClick={() => cardClicked(selected)}> I am interested </Button>
-              </Card.Body>
-            </Card>
+          <div className="post_wrapper" key={selected.id}>
+            <div class="header_wrapper">
+              <img src={selected.img} className="header_img" />
+            </div>
+            <div className="content_text">
+              <p className="title">{selected.name}</p>
+              <p className="txt">{selected.description}</p>
+              <div className="line_separator" ></div>
+              <div className="tile_footer">
+                <div className="date">From: {selected.email}</div>
+                <a href="#" onClick={() => {cardClicked(selected)}} className="pull-right readmore">Pick Up</a>
+              </div>
+            </div>
           </div>
         </InfoWindow> : null}
       </GoogleMap>
     </div>
     {showPopUp && <Popup content={
         <>
-          <img src={popupCurrImgData} id="usersFood"></img>
-          <h1> {popupCurrName} </h1>
-          <p> Posted by: {popupCurrEmail} </p>
-          <p> {popupCurrDesc} </p>
-          <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
-          {messageSent && <p> You have reserved this food! Check you text messages to get the address! </p>}
+          <div className="post_wrapper" key={selected.id}>
+            <div class="header_wrapper">
+              <img src={popupCurrImgData} className="header_img" />
+            </div>
+            <div className="content_text">
+              <p className="title">{popupCurrName}</p>
+              <p className="txt">{popupCurrDesc}</p>
+              <div className="line_separator" ></div>
+              <div className="tile_footer">
+                <div className="date">From: {popupCurrEmail}</div>
+                <a href="#" onClick={() => {getFoodClicked()}} className="pull-right readmore">Pick Up</a>
+              </div>
+              <div className="line_separator" ></div>
+              {messageSent && <div className="date"> You have reserved this food! Check you text messages to get the address! </div>}
+            </div>
+          </div>
+          
         </>
         } handleClose={handlePopupClose} ></Popup>}
     </>
