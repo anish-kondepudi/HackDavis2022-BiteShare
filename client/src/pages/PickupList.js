@@ -46,18 +46,13 @@ const PickupList = () => {
   }
 
   const getFoodClicked = () => {
-    console.log("Food id: " + popupCurrId)
     // two emails -> food email, and user curr email
     // need to get the phone number of both
-    console.log("User email: " + userEmail);
     fetch("http://localhost:5000/users/" + userEmail).then(res => res.json()).then(currUserData => {
       fetch("http://localhost:5000/users/" + popupCurrEmail).then(res => res.json()).then(popupUserData => {
         let userPhoneNumber = currUserData[0]["phoneNumber"];
         let donorPhoneNumber = popupUserData[0]["phoneNumber"];
         let donorAddress = popupUserData[0]["address"];
-        console.log("User phone number: " + userPhoneNumber);
-        console.log("Donor phone number: " + donorPhoneNumber);
-        console.log("Donor address: " + donorAddress);
         fetch("http://localhost:5000/pickup/" + popupCurrId, {
           method: 'PUT', 
           headers: {
@@ -65,7 +60,6 @@ const PickupList = () => {
             'Content-Type': 'application/json'
            },
           body: JSON.stringify({donorPhoneNumber: donorPhoneNumber, userPhoneNumber: userPhoneNumber, donorAddress: donorAddress})}).then(res => res.json()).then(data => {
-            console.log(data);
             setTextMessageSent(true);
           })
       })
@@ -106,13 +100,9 @@ const PickupList = () => {
               <div className="date">From: {popupCurrEmail}</div>
               <a href="#" onClick={() => {getFoodClicked()}} className="pull-right readmore">Pick Up</a>
             </div>
+            <div className="tile_footer"></div>
+            {messageSent && <div className="date"> You have reserved this food! Check you text messages to get the address! </div>}
           </div>
-          {/* <img src={popupCurrImgData} id = "usersFood"></img>
-          <h1> {popupCurrName} </h1>
-          <p> Posted by: {popupCurrEmail} </p>
-          <p> {popupCurrDesc} </p>
-          <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
-          {messageSent && <p> You have reserved this food! Check your text messages to get the address. </p>} */}
         </div>
         </>
         } handleClose={handlePopupClose} ></Popup>}
