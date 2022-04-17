@@ -94,12 +94,26 @@ const PickupList = () => {
 
       {showPopUp && <Popup content={
         <>
-          <img src={popupCurrImgData} id = "usersFood"></img>
+        <div className="post_wrapper" key={popupCurrId}>
+          <div class="header_wrapper">
+            <img src={popupCurrImgData} className="header_img" />
+          </div>
+          <div className="content_text">
+            <p className="title">{popupCurrName}</p>
+            <p className="txt">{popupCurrDesc}</p>
+            <div className="line_separator" ></div>
+            <div className="tile_footer">
+              <div className="date">From: {popupCurrEmail}</div>
+              <a href="#" onClick={() => {getFoodClicked()}} className="pull-right readmore">Pick Up</a>
+            </div>
+          </div>
+          {/* <img src={popupCurrImgData} id = "usersFood"></img>
           <h1> {popupCurrName} </h1>
           <p> Posted by: {popupCurrEmail} </p>
           <p> {popupCurrDesc} </p>
           <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
-          {messageSent && <p> You have reserved this food! Check your text messages to get the address. </p>}
+          {messageSent && <p> You have reserved this food! Check your text messages to get the address. </p>} */}
+        </div>
         </>
         } handleClose={handlePopupClose} ></Popup>}
       
