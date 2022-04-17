@@ -5,20 +5,20 @@
     margin-top: 20px;
 }
 
-h2 {
+.About > h2 {
     text-align: center;
 }
 
-#mission {
+.About > #mission {
     margin-top: 40px;
     margin-bottom: 30px;
 
 }
 
-#foodwaste {
+.About > #foodwaste {
     height: 30%;
 }
-p {
+.About > div > p {
     display: block;
     margin-left: 25%;
     margin-right: 25%;
