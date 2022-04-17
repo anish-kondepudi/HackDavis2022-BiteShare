@@ -16,6 +16,8 @@ const food = mongoose.model("foods", new Schema({
     data: Buffer,
     email: String,
     name: String,
+    startTime: String,
+    endTime: String,
     description: String,
     status: Boolean,
     deleted: Boolean
@@ -53,6 +55,8 @@ module.exports = function(app){
             name: req.body.name,
             description: req.body.description,
             email: req.body.email,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
             deleted: false,
             status: false
         }

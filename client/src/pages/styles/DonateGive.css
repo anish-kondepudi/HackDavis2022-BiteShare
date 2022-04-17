@@ -5,7 +5,11 @@
     width: 70%
 }
 
-#uploadButton {
+#fileUploadButton {
+    margin-top: 20px;
+}
+
+#submitButton {
     margin-top: 20px;
     width: 150px;
 }

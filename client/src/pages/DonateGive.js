@@ -1,22 +1,28 @@
 import { React, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import DateTimePicker from 'react-datetime-picker';
+import { useNavigate } from "react-router-dom";
 import "./styles/DonateGive.css";
 
 const DonateGive = () => {
+  const navigate = useNavigate();
   const [foodName, setFoodName] = useState("");
   const [foodDesc, setFoodDesc] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [file, setFile] = useState();
-  const [imgErr, setImgErr] = useState("");
+  const [imgUploadErr, setImgUploadErr] = useState("");
+
+  const userEmail = useSelector(state => state.email);
+  console.log("Users email: " + userEmail);
 
   const handleFoodNameChange = (event) => {
-    console.log("Food Name: " + foodName)
     setFoodName(event.target.value);
   }
 
   const handleFoodDescChange = (event) => {
-    console.log("Food Name: " + foodDesc)
-
     setFoodDesc(event.target.value);
   }
 
@@ -38,23 +44,27 @@ const DonateGive = () => {
           body: JSON.stringify({
             name: foodName,
             description: foodDesc,
-            email: "sai@gmail.com",
-            data: imageData
+            email: userEmail,
+            data: imageData,
+            startTime: startTime,
+            endTime: endTime
           })
         }).then(res => {
           console.log("Res ok: " + res.ok)
           if(!res.ok){
-            setImgErr("Image uploaded is too large!");
+            setImgUploadErr("Image uploaded is too large!");
             throw res;
           }
-          setImgErr("");
+          setImgUploadErr("Success!");
           return res.json();
         }).then(data => {
+          navigate("/donate/view");
           console.log("Post data: " + data["_id"]);
         });
     };
     reader.onerror = (err) => {
-        console.log("Error: err");
+      setImgUploadErr("Image uploaded is too large!");
+      console.log("Error: err");
     };
 
     reader.readAsDataURL(file);
@@ -71,9 +81,29 @@ const DonateGive = () => {
                 <Form.Label>Food Description</Form.Label>
                 <Form.Control type="text" placeholder="Food Description" onChange={handleFoodDescChange} />
             </Form.Group>
-            <p>{imgErr}</p> 
-          <input type="file" name="file" id="upload" onChange={fileSelected}/>
-          <Button onClick={uploadImage} id = "uploadButton"> Upload Image </Button>
+            <Form.Label>Start Time (DD.MM.YYYY HH:mm)</Form.Label>
+            <DateTimePicker
+                  renderInput={(props) => <p {...props} />}
+                  label="DateTimePicker"
+                  value={startTime}
+                  onChange={(newStartTime) => {
+                    console.log("New start time: " + newStartTime)
+                    setStartTime(newStartTime);
+                  }}
+            />
+            <Form.Label>End Time (DD.MM.YYYY HH:mm)</Form.Label>
+            <DateTimePicker
+                  renderInput={(props) => <p {...props} />}
+                  label="DateTimePicker"
+                  value={endTime}
+                  onChange={(newEndTime) => {
+                    console.log("New end time: " + newEndTime);
+                    setEndTime(newEndTime);
+                  }}
+            />
+            <input type="file" name="file" id="fileUploadButton" onChange={fileSelected}/>
+            <Button onClick={uploadImage} id = "submitButton"> Upload Food </Button> 
+            <p> {imgUploadErr} </p>
         </div>
       </Form>
     </div>
