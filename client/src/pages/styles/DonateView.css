@@ -1,6 +1,7 @@
 .DonateView {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .individualCard {

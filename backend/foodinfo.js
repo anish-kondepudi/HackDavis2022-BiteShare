@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 
 const food = mongoose.model("foods", new Schema({ 
     id: ObjectId,
-    data: Buffer,
+    data: String,
     email: String,
     name: String,
     startTime: String,
@@ -56,6 +56,18 @@ module.exports = function(app){
             } 
           });
     });
+
+    app.get("/food/:email", (req, res) => {
+        const email = req.params.email;
+        food.find({email}, function(err, allFoodOfEmail) {
+            if (err) {
+                throw new Error(err)
+            } else {
+                res.send(allFoodOfEmail); 
+            } 
+          });
+    });
+    
     app.post("/food", (req, res) => {
         /*fs.readFile(req.body.food, function(err, data){
             if (err) {
@@ -64,6 +76,7 @@ module.exports = function(app){
                 console.log("Data: " + data);
             }
         });*/
+        console.log("Image data given: " + req.body.data);
         newFood = {
             _id: new ObjectId(),
             data: req.body.data,
