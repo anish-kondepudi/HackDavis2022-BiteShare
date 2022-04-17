@@ -2,7 +2,7 @@
 
 BiteShare is a site designed to combat the large amount of food disposed of each day despite being perfectly edible. Hunger is a problem faced by several counties in California, but this website would like to combat it in Davis specifically.
 
-This project was architected by [Anish Kondepudi](https://github.com/anish-kondepudi), [Saipranav Kotamredd](https://https://github.com/Saipranav-Kotamreddy), and [Rachit Sharma](https://github.com/RachitSharma2001).
+This project was architected by [Anish Kondepudi](https://github.com/anish-kondepudi), [Saipranav Kotamreddy](https://https://github.com/Saipranav-Kotamreddy), and [Rachit Sharma](https://github.com/RachitSharma2001).
 
 __Below are the languages used in creating this Web App:__
 
@@ -40,5 +40,5 @@ __Shown below are some images of the Bite Share Web Application:__
 ![Map of Foods Available](https://cdn.discordapp.com/attachments/947189178532233239/965286313077129306/Screen_Shot_2022-04-17_at_9.22.21_AM.png)
 
 **Notes:**
-
+->Website is hosted locally, plans to upload to the cloud in a future update
 
