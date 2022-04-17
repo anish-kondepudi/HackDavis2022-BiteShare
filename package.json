@@ -13,13 +13,17 @@
   "author": "Rachit Sharma & Anish Kondepudi & Saipranav Kotamreddy",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "axios": "^0.26.1",
     "concurrently": "^4.1.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.11",
+    "node-fetch": "^3.2.3",
     "nodemon": "^1.19.1",
-    "redux": "^4.1.2"
+    "react-hook-form": "^7.30.0",
+    "redux": "^4.1.2",
+    "twilio": "^3.76.1"
   }
 }
