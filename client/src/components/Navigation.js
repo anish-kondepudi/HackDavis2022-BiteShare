@@ -1,11 +1,18 @@
 import React from 'react';
 import logo from './images/logo.png'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEmail } from '../actions';
 
 const Navigation = () => {
 
   const userEmail = useSelector(state => state.email);
+  const dispath = useDispatch();
+
+  const onLogout = async () => {
+    await new Promise(r => setTimeout(r, 1)); // sleep 1 ms before logging out
+    dispath(setEmail(''));
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light color-nav">
@@ -35,11 +42,11 @@ const Navigation = () => {
 
       <div className="collapse navbar-collapse justify-content-end mr-5">
         <ul className="navbar-nav mr-auto">
-          {userEmail ?<>
+          {userEmail ? <>
             <li className="nav-item">
-              <a className="nav-link" href="/">Logout</a>
+              <a className="nav-link" href="/" onClick={() => {onLogout()}}>Logout</a>
             </li></> :
-             <><li className="nav-item">
+            <><li className="nav-item">
               <a className="nav-link" href="/login">Login</a>
            </li>
            <li className="nav-item">
