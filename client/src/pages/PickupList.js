@@ -13,6 +13,7 @@ const PickupList = () => {
   const [popupCurrEmail, setPopupCurrEmail] = useState();
   const [popupCurrId, setPopupCurrId] = useState();
   const [popupCurrDesc, setPopupCurrDesc] = useState();
+  const [messageSent, setTextMessageSent] = useState(false);
 
 
   useEffect(() => {
@@ -27,7 +28,12 @@ const PickupList = () => {
   }, []);
 
   const handlePopupClose = (event) => {
+    // reload page if the user reserved the food, so that its deleted from page
+    if(setTextMessageSent) {
+      window.location.reload();
+    }
     setShowPopup(false);
+    setTextMessageSent(false);
   }
 
   const cardClicked = (indFood) => {
@@ -60,6 +66,7 @@ const PickupList = () => {
            },
           body: JSON.stringify({donorPhoneNumber: donorPhoneNumber, userPhoneNumber: userPhoneNumber, donorAddress: donorAddress})}).then(res => res.json()).then(data => {
             console.log(data);
+            setTextMessageSent(true);
           })
       })
     })
@@ -103,6 +110,7 @@ const PickupList = () => {
           <p> Posted by: {popupCurrEmail} </p>
           <p> {popupCurrDesc} </p>
           <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
+          {messageSent && <p> You have reserved this food! Check you text messages to get the address! </p>}
         </>
         } handleClose={handlePopupClose} ></Popup>}
       

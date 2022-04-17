@@ -23,7 +23,7 @@ const DonateView = () => {
       console.log("Data length after get: " + data.length)
       let indImages = []
       for(let i = 0; i < data.length; i++) {
-        indImages.push({imgData: data[i].data, name: data[i].name, desc: data[i].description});
+        indImages.push({imgData: data[i].data, name: data[i].name, desc: data[i].description, pickedUp: data[i].status});
         //document.getElementById("something").src = data[i].data;
       }
       console.log("Image list: " + indImages);
@@ -32,15 +32,17 @@ const DonateView = () => {
   }, []);
   return (
     <div className="DonateView">
-      {allUsersData.map((allUsersData) => 
+      {allUsersData.map((indUserData) => 
         <div class = "individualCard">
         <Card style={{ width: '18rem' }}>
         <Card.Body>
-          <img src={allUsersData.imgData} id = "usersFood"></img>
-          <Card.Title>{allUsersData.name}</Card.Title>
+          <img src={indUserData.imgData} id = "usersFood"></img>
+          <Card.Title>{indUserData.name}</Card.Title>
           <Card.Text>
-            {allUsersData.desc}
+            {indUserData.desc}
           </Card.Text>
+          {indUserData.pickedUp && <Card.Text> This has been picked up! </Card.Text>}
+          {!indUserData.pickedUp && <Card.Text> This is still Available </Card.Text>}
         </Card.Body>
         </Card>
         </div>

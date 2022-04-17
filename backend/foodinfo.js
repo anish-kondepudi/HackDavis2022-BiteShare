@@ -39,7 +39,9 @@ module.exports = function(app){
                 var allFood = {};
             
                 foods.forEach(function(indFood) {
-                  allFood[indFood._id] = indFood;
+                    if(!indFood.status) {
+                        allFood[indFood._id] = indFood;
+                    }
                 });
             
                 res.send(allFood); 
