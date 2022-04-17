@@ -9,16 +9,18 @@ const App = () => {
     <Router>
       <div className="App">
         <Navigation/>
-        <Routes>
-          <Route path='/' exact element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/donate/give' element={<DonateGive />} />
-          <Route path='/donate/view' element={<DonateView />} />
-          <Route path='/pickup/map' element={<PickupMap />} />
-          <Route path='/pickup/list' element={<PickupList />} />
-        </Routes>
+        <div id="transition-block">
+          <Routes>
+            <Route path='/' exact element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/donate/give' element={<DonateGive />} />
+            <Route path='/donate/view' element={<DonateView />} />
+            <Route path='/pickup/map' element={<PickupMap />} />
+            <Route path='/pickup/list' element={<PickupList />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
