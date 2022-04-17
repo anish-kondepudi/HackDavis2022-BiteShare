@@ -130,7 +130,11 @@ const PickupMap = () => {
   }, []);
 
   const handlePopupClose = (event) => {
+    if(setTextMessageSent) {
+      window.location.reload();
+    }
     setShowPopup(false);
+    setTextMessageSent(false);
   }
 
   const getFoodClicked = () => {
@@ -154,6 +158,7 @@ const PickupMap = () => {
            },
           body: JSON.stringify({donorPhoneNumber: donorPhoneNumber, userPhoneNumber: userPhoneNumber, donorAddress: donorAddress})}).then(res => res.json()).then(data => {
             console.log(data);
+            setTextMessageSent(true);
           })
       })
     })
@@ -264,6 +269,7 @@ const PickupMap = () => {
           <p> Posted by: {popupCurrEmail} </p>
           <p> {popupCurrDesc} </p>
           <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
+          {messageSent && <p> You have reserved this food! Check you text messages to get the address! </p>}
         </>
         } handleClose={handlePopupClose} ></Popup>}
     </>
