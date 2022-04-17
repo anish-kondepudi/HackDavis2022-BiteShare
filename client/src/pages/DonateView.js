@@ -31,9 +31,9 @@ const DonateView = () => {
   }, []);
   return (
     <div className="DonateView">
-      {allUsersData.map((indUserData) => 
-        <div className="post_wrapper" key={indUserData.id}>
-          <div class="header_wrapper">
+      {allUsersData.map((indUserData, i) => 
+        <div className="post_wrapper" key={i}>
+          <div className="header_wrapper">
             <img src={indUserData.imgData} className="header_img" />
           </div>
           <div className="content_text">
