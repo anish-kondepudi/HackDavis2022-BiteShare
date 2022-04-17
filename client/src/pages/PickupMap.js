@@ -199,10 +199,7 @@ const PickupMap = () => {
   if (!isLoaded) return "Loading Maps";
 
   return (
-    <>
-    <button onClick={()=> {
-    }}>thic boi</button>
-    <div className='PickupMap'>
+    <><div className='PickupMap'>
       <GoogleMap 
         mapContainerStyle={mapContainerStyle}
         zoom={15}
