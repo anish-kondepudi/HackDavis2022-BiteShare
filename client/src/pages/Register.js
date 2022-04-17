@@ -3,13 +3,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './styles/Register.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setEmail as setReduxStoreEmail } from '../actions';
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
   
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -52,6 +58,8 @@ const Register = () => {
       return res.json();
     }).then(data => {
       console.log("Post data: " + data["_id"]);
+      dispatch(setReduxStoreEmail(email));
+      navigate("/");
     });
 };
   return (
