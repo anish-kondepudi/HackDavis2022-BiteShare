@@ -38,6 +38,8 @@ __Shown below are some images of the Bite Share Web Application:__
 ![Donate Food Page](https://media.discordapp.net/attachments/947189178532233239/965286767756464178/Screen_Shot_2022-04-17_at_9.24.49_AM.png?width=904&height=468)
 ![List of Foods Available](https://cdn.discordapp.com/attachments/947189178532233239/965287462517743626/Screen_Shot_2022-04-17_at_9.21.01_AM-min.png)
 ![Map of Foods Available](https://cdn.discordapp.com/attachments/947189178532233239/965286313077129306/Screen_Shot_2022-04-17_at_9.22.21_AM.png)
+
+Video:Demonstration:
 [![Video Demonstration](http://img.youtube.com/vi/aQEfC6S7FmI/0.jpg)](http://www.youtube.com/watch?v=aQEfC6S7FmI "Hack Davis 2022- Bite Share")
 
 
