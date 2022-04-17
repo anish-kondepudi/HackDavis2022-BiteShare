@@ -1,8 +1,13 @@
 import { React, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import "./styles/DonateGive.css";
+
 const DonateGive = () => {
   const [foodName, setFoodName] = useState("");
   const [foodDesc, setFoodDesc] = useState("");
+  const [file, setFile] = useState();
+  const [imgErr, setImgErr] = useState("");
 
   const handleFoodNameChange = (event) => {
     console.log("Food Name: " + foodName)
@@ -15,9 +20,11 @@ const DonateGive = () => {
     setFoodDesc(event.target.value);
   }
 
-
   const fileSelected = (event) => {
-    const file = event.target.files[0];
+    setFile(event.target.files[0]); 
+  }
+
+  const uploadImage = (event) => {
     const reader = new FileReader();
     reader.onload = (event) => {
         let imageData = event.target.result;
@@ -37,8 +44,10 @@ const DonateGive = () => {
         }).then(res => {
           console.log("Res ok: " + res.ok)
           if(!res.ok){
+            setImgErr("Image uploaded is too large!");
             throw res;
           }
+          setImgErr("");
           return res.json();
         }).then(data => {
           console.log("Post data: " + data["_id"]);
@@ -53,19 +62,19 @@ const DonateGive = () => {
   return (
     <div className="DonateGive">
       <Form>
-          <div class = "FormInput">
+        <div class = "FormInput">
             <Form.Group className="mb-3">
                 <Form.Label>Food Name</Form.Label>
                 <Form.Control type="text" placeholder="Food Name" onChange={handleFoodNameChange} />
             </Form.Group>
-          </div>
-          <div class = "FormInput">
             <Form.Group className="mb-3">
                 <Form.Label>Food Description</Form.Label>
                 <Form.Control type="text" placeholder="Food Description" onChange={handleFoodDescChange} />
             </Form.Group>
-          </div>
+            <p>{imgErr}</p> 
           <input type="file" name="file" id="upload" onChange={fileSelected}/>
+          <Button onClick={uploadImage} id = "uploadButton"> Upload Image </Button>
+        </div>
       </Form>
     </div>
   );

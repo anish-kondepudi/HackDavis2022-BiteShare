@@ -1,0 +1,11 @@
+.FormInput {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 70%
+}
+
+#uploadButton {
+    margin-top: 20px;
+    width: 150px;
+}
