@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import "./styles/DonateView.css";
 import Card from 'react-bootstrap/Card';
 
@@ -15,10 +16,10 @@ function arrayBufferToBase64( buffer ) {
 
 const DonateView = () => {
   const [allUsersData, setAllUsersData] = useState([]);
-  //const userEmail = useSelector(state => state.email);
+  const userEmail = useSelector(state => state.email);
 
   useEffect(() => {
-    fetch('http://localhost:5000/food/hello@gmail.com').then(res => res.json()).then(data => {
+    fetch('http://localhost:5000/food/email/' + userEmail).then(res => res.json()).then(data => {
       console.log("Data length after get: " + data.length)
       let indImages = []
       for(let i = 0; i < data.length; i++) {

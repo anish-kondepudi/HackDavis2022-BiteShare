@@ -57,7 +57,7 @@ module.exports = function(app){
           });
     });
 
-    app.get("/food/:email", (req, res) => {
+    app.get("/food/email/:email", (req, res) => {
         const email = req.params.email;
         food.find({email}, function(err, allFoodOfEmail) {
             if (err) {
