@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import {
   GoogleMap,
   useLoadScript,
-  marker,
   InfoWindow,
+  Marker,
 } from '@react-google-maps/api';
 import Geocode from "react-geocode";
-
-Geocode.setApiKey("AIzaSyBTVIJwaV2ppI-Cb6H8NMfG3ALh0NztJfQ");
-Geocode.setLanguage("en");
-Geocode.setLocationType("ROOFTOP");
-Geocode.enableDebug();
-
-
+import './styles/PickupMap.css';
 
 const PickupMap = (props) => {
 
   const [markers, setMarkers ] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   // Hard Coding 750 Orchard Rd, Davis, CA 95616
   const [lat, setLat] = useState(38.543770);
   const [lng, setLng] = useState(-121.761660);
 
-  // Fetch Live Location and Update Lat & Lng
+  // On Page Load
   useEffect(() => {
     // Fetch Live Location and Update Lat & Lng
     if (!navigator.geolocation) {
@@ -36,8 +31,12 @@ const PickupMap = (props) => {
       });
     }
 
-    // Grab Location Markers
-    
+    // Set Up Geocoder
+    Geocode.setApiKey("AIzaSyBTVIJwaV2ppI-Cb6H8NMfG3ALh0NztJfQ");
+    Geocode.setLanguage("en");
+    Geocode.setLocationType("ROOFTOP");
+
+    // Fetch Location Markers
     let url = 'http://localhost:5000/food/';
     fetch(url).then(res => {
       if(!res.ok){
@@ -60,31 +59,27 @@ const PickupMap = (props) => {
                 data.forEach((record, _) => {
                   resolve({
                     "address": record.address,
-                    "id": id
+                    "id": id,
+                    "name": record.username
                   });
                 })
               });
             }));
-            return emailMap;
         }
       }
-      //return emailMap
+      return emailMap;
     }).then(emailMap => {
-      const listOfFoods = [];
       Promise.all(emailMap).then(res => {
         for(let i = 0; i < res.length; i++) {
           res[i][0].then(value => {
             Geocode.fromAddress(value.address).then(
               (response) => {
                 const { lat, lng } = response.results[0].geometry.location;
-                const foodData = {"lat": lat, "lng": lng, "address": value.address, "id": value.id}
+                const foodData = {"lat": lat, "lng": lng, "address": value.address, "id": value.id, "name": value.name}
                 setMarkers((current) => [
                   ...current,
                   foodData,
                 ]);
-                console.log("lol");
-                console.log(markers);
-                console.log("lel");
               },
               (error) => {
                 console.error(error);
@@ -92,11 +87,6 @@ const PickupMap = (props) => {
             );
           })
         }
-
-
-        // console.log("listofFoodes: ");
-        // console.log(listOfFoods[0]);
-        // console.log("done");
       });
     });
   }, []);
@@ -123,6 +113,12 @@ const PickupMap = (props) => {
     libraries
   })
 
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
 
@@ -134,10 +130,27 @@ const PickupMap = (props) => {
     <div className='PickupMap'>
       <GoogleMap 
         mapContainerStyle={mapContainerStyle}
-        zoom={13}
+        zoom={15}
         center={center}
         options={options}
+        onLoad={onMapLoad}
       >
+          {markers.map(marker => <Marker
+            key={marker.id}
+            position={{lat: marker.lat, lng: marker.lng }}
+            onClick={() => {setSelected(marker)}}
+          />)}
+        {selected ? <InfoWindow
+          position={{lat: selected.lat, lng: selected.lng }}
+          onCloseClick={() => {setSelected(null)}}
+        >
+          <div>
+            <h2>Food Popup</h2>
+            <p>{selected.name}</p>
+            <p>{selected.address}</p>
+            <p>{selected.id}</p>
+          </div>
+        </InfoWindow> : null}
       </GoogleMap>
     </div>
     </>
