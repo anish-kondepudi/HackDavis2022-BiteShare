@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.11",
+    "node-fetch": "^3.2.3",
     "nodemon": "^1.19.1",
     "redux": "^4.1.2",
     "twilio": "^3.76.1"

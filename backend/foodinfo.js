@@ -7,8 +7,8 @@ const Schema = mongoose.Schema;
 const app = express();
 app.use(express.json({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-
-const accountSid='AC6d48a9b4c6a3b6d8f034f1005f5e1202';
+const axios=require('axios');
+accountSid='AC6d48a9b4c6a3b6d8f034f1005f5e1202';
 const authToken='66231fa7fc025e84c5716ec3d9efab1a';
 const client= new twilio(accountSid, authToken);
 
@@ -85,40 +85,57 @@ module.exports = function(app){
     })
     app.put("/pickup/:id", (req, res) => {
         const id = req.params.id;
-        const userEmail=req.body.email;
+        const userPhoneNumber=req.body.userPhoneNumber;
+        let donorPhoneNumber=req.body.donorPhoneNumber;
+        let donorAddress=req.body.donorAddress;
         const updateFood = {
             status: true
         }
         const url2= 'http://localhost:5000/food/' + id;
-        fetch(url2).then(res => {
-            if(!res.ok){
-                throw res;
-              }
-              return res.json();
-            }).then(data => {
-                url3='http://localhost:5000/users/' + data[0][email];
-                fetch(url3).then(res => {
+        food.findByIdAndUpdate(id, updateFood, function(err, docs) {
+            if (err) {
+                throw new Error(err);
+            } else {
+                //console.log("before axios 1");
+                /*axios.get(url2).then(res => {
+                    console.log("in axios 1");
                     if(!res.ok){
                         throw res;
                       }
                       return res.json();
                     }).then(data => {
-                        const donorNumber=data[0]["phoneNumber"];
+                        url3='http://localhost:5000/users/' + data[0][email];
+                        axios.get(url3).then(res => {
+                            console.log("in axios 2");
+                            if(!res.ok){
+                                throw res;
+                              }
+                              return res.json();
+                            }).then(data => {
+                                donorNumber=data[0]["phoneNumber"];
+                                donorAddress=data[0]["address"];
+                              });
                       });
-              });
-        food.findByIdAndUpdate(id, updateFood, function(err, docs) {
-            if (err) {
-                throw new Error(err);
-            } else {
                 let url = 'http://localhost:5000/users/' + userEmail;
-                fetch(url).then(res => {
+                axios.get(url).then(res => {
+                    console.log("in axios 3");
                 if(!res.ok){
                     throw res;
                   }
                   return res.json();
                 }).then(data => {
                     const userNumber=data[0]["phoneNumber"];
-                  });
+                  });*/
+                client.messages.create({
+                    body: "Someone is coming to pick up your food",
+                    to: donorPhoneNumber,
+                    from: '+19896144532'
+                })
+                client.messages.create({
+                    body: "You registered to pick up food from " +donorAddress,
+                    to: userPhoneNumber,
+                    from: '+19896144532'
+                })
                 res.send(updateFood);
             }
         });
