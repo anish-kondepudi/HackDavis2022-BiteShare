@@ -20,18 +20,6 @@ let userSchema= new mongoose.Schema({
     phoneNumber: String
 });
 
-app.get('/', function(req,res,next){
-    mongoose.connect(url).then(
-        () => {
-            let dbo = db.db("BiteShare");
-            dbo.collection("Login_Table").find().then(users => res.json(users))
-        },
-        err => {
-            console.log("Error" + err);
-        }
-    );
-});
-
 let userModel=mongoose.model('users',userSchema);
 module.exports=function(app){
     app.get("/users", (req, res) => {

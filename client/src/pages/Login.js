@@ -32,18 +32,15 @@ const Login = () => {
     };
     let url = 'http://localhost:5000/users/' + email;
     fetch(url).then(res => {
-      console.log(res);
       if(!res.ok){
         throw res;
       }
-      console.log(res.body.password);
       return res.json();
     }).then(data => {
       if(password===data[0]["password"]){
         dispatch(setEmail(email));
         navigate("/");
       }
-      console.log("password data: " + data[0]["password"]);
     });
 };
  
