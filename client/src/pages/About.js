@@ -18,7 +18,7 @@ const About = () => {
       Thanks for reading!
       </h4>
       <h15>(Disclaimer: users posting food will be required to list their address as to note where to pick up food from. If this is an issue, please
-      register your account using address you can drop the food off at, but wpuld feel comfortable meeting others at. Only registered users are able
+      register your account using address you can drop the food off at, but would feel comfortable meeting others at. Only registered users are able
       to see these addresses, so security is fairly well-kept)</h15>
     </div>
   );
