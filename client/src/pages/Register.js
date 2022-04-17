@@ -59,7 +59,7 @@ const Register = () => {
     }).then(data => {
       console.log("Post data: " + data["_id"]);
       dispatch(setReduxStoreEmail(email));
-      navigate("/");
+      window.location.href = "/http://localhost:3000/";
     });
 };
   return (
