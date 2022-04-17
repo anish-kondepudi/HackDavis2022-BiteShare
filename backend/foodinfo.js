@@ -100,6 +100,9 @@ module.exports = function(app){
         const id = req.params.id;
         const userPhoneNumber=req.body.userPhoneNumber;
         let donorPhoneNumber=req.body.donorPhoneNumber;
+        console.log("User phone: " + userPhoneNumber);
+        console.log("Doner phone: " + donorPhoneNumber);
+        console.log("Body: " + req.body);
         let donorAddress=req.body.donorAddress;
         const updateFood = {
             status: true
