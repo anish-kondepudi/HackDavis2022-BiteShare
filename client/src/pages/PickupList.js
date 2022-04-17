@@ -38,10 +38,10 @@ const PickupList = () => {
           <img src={indFood.imgData} id = "usersFood"></img>
           <Card.Title>{indFood.name}</Card.Title>
           <Card.Text>
-            {indFood.desc}
+            Posted by: {indFood.email}
           </Card.Text>
           <Card.Text>
-            {indFood.email}
+            {indFood.desc}
           </Card.Text>
         </Card.Body>
         </Card>
