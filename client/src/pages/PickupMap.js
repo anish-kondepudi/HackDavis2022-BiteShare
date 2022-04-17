@@ -11,6 +11,7 @@ import './styles/PickupMap.css';
 import Popup from "./Popup";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import FoodBankIcon from '../components/images/foodbank.png';
 
 const PickupMap = () => {
 
@@ -24,6 +25,15 @@ const PickupMap = () => {
   const [popupCurrEmail, setPopupCurrEmail] = useState();
   const [popupCurrId, setPopupCurrId] = useState();
   const [popupCurrDesc, setPopupCurrDesc] = useState();
+
+  const getIconUrl = (marker) => {
+    const foodBanks = ['thepantry@asucd.ucdavis.edu', 'info@yolofoodbank.org', 'tbryant@sacramentofoodbank.org'];
+    if (foodBanks.indexOf(marker.email) > -1) {
+      return FoodBankIcon;
+    } else {
+      return "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    }
+  }
 
   const [messageSent, setTextMessageSent] = useState(false);
   // Hard Coding 750 Orchard Rd, Davis, CA 95616
@@ -202,7 +212,7 @@ const PickupMap = () => {
     <><div className='PickupMap'>
       <GoogleMap 
         mapContainerStyle={mapContainerStyle}
-        zoom={15}
+        zoom={13}
         center={center}
         options={options}
         onLoad={onMapLoad}
@@ -210,6 +220,9 @@ const PickupMap = () => {
           {markers.map(marker => <Marker
             key={marker.id}
             position={{lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: getIconUrl(marker)
+            }}
             onClick={() => {setSelected(marker)}}
           />)}
         {selected ? <InfoWindow
