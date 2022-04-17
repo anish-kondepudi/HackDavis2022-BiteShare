@@ -1,0 +1,14 @@
+.DonateView {
+    display: flex;
+    flex-direction: row;
+}
+
+.individualCard {
+    margin: 20px;
+    width: 18rem;
+}
+
+#usersFood {
+    width: 16rem;
+    height: 16rem;
+}
