@@ -138,18 +138,13 @@ const PickupMap = () => {
   }
 
   const getFoodClicked = () => {
-    console.log("Food id: " + popupCurrId)
     // two emails -> food email, and user curr email
     // need to get the phone number of both
-    console.log("User email: " + userEmail);
     fetch("http://localhost:5000/users/" + userEmail).then(res => res.json()).then(currUserData => {
       fetch("http://localhost:5000/users/" + popupCurrEmail).then(res => res.json()).then(popupUserData => {
         let userPhoneNumber = currUserData[0]["phoneNumber"];
         let donorPhoneNumber = popupUserData[0]["phoneNumber"];
         let donorAddress = popupUserData[0]["address"];
-        console.log("User phone number: " + userPhoneNumber);
-        console.log("Donor phone number: " + donorPhoneNumber);
-        console.log("Donor address: " + donorAddress);
         fetch("http://localhost:5000/pickup/" + popupCurrId, {
           method: 'PUT', 
           headers: {
@@ -157,7 +152,6 @@ const PickupMap = () => {
             'Content-Type': 'application/json'
            },
           body: JSON.stringify({donorPhoneNumber: donorPhoneNumber, userPhoneNumber: userPhoneNumber, donorAddress: donorAddress})}).then(res => res.json()).then(data => {
-            console.log(data);
             setTextMessageSent(true);
           })
       })
@@ -224,7 +218,6 @@ const PickupMap = () => {
   return (
     <>
     <button onClick={()=> {
-      console.log(markers);
     }}>thic boi</button>
     <div className='PickupMap'>
       <GoogleMap 

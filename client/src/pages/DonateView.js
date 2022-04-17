@@ -24,7 +24,6 @@ const DonateView = () => {
       let indImages = []
       for(let i = 0; i < data.length; i++) {
         indImages.push({imgData: data[i].data, name: data[i].name, desc: data[i].description, pickedUp: data[i].status});
-        //document.getElementById("something").src = data[i].data;
       }
       console.log("Image list: " + indImages);
       setAllUsersData(indImages);
@@ -33,18 +32,17 @@ const DonateView = () => {
   return (
     <div className="DonateView">
       {allUsersData.map((indUserData) => 
-        <div class = "individualCard">
-        <Card style={{ width: '18rem' }}>
-        <Card.Body>
-          <img src={indUserData.imgData} id = "usersFood"></img>
-          <Card.Title>{indUserData.name}</Card.Title>
-          <Card.Text>
-            {indUserData.desc}
-          </Card.Text>
-          {indUserData.pickedUp && <Card.Text> This has been picked up! </Card.Text>}
-          {!indUserData.pickedUp && <Card.Text> This is still Available </Card.Text>}
-        </Card.Body>
-        </Card>
+        <div className="post_wrapper" key={indUserData.id}>
+          <div class="header_wrapper">
+            <img src={indUserData.imgData} className="header_img" />
+          </div>
+          <div className="content_text">
+            <p className="title">{indUserData.name}</p>
+            <p className="txt">{indUserData.desc}</p>
+            <div className="line_separator" ></div>
+            {indUserData.pickedUp && <div className="date"> This has been picked up! </div>}
+            {!indUserData.pickedUp && <div className="date"> This is still Available </div>}
+          </div>
         </div>
       )}
       
