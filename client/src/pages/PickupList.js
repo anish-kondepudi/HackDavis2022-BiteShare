@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Popup from "./Popup";
+import './styles/PickupList.css'
 
 const PickupList = () => {
   const [allFood, setAllFood] = useState([]);
@@ -28,8 +29,7 @@ const PickupList = () => {
   }, []);
 
   const handlePopupClose = (event) => {
-    // reload page if the user reserved the food, so that its deleted from page
-    if(setTextMessageSent) {
+    if(messageSent) {
       window.location.reload();
     }
     setShowPopup(false);
@@ -70,38 +70,27 @@ const PickupList = () => {
           })
       })
     })
-
-    /*
-    fetch("http://localhost:5000/pickup/" + popupCurrId, {
-        method: 'PUT', 
-        body: JSON.stringify({
-        donorPhoneNumber: 
-      })
-    }).then(res => res.json()).then(data => {
-      console.log("Data: " + data);
-    })*/
   }
 
   return (
     <div className="PickupList">
       <div className="DonateView">
-      {allFood.map((indFood) => 
-        <div class = "individualCard">
-        <Card style={{ width: '18rem' }}>
-        <Card.Body>
-          <img src={indFood.imgData} id = "usersFood"></img>
-          <Card.Title>{indFood.name}</Card.Title>
-          <Card.Text>
-            Posted by: {indFood.email}
-          </Card.Text>
-          <Card.Text>
-            {indFood.desc}
-          </Card.Text>
-          <Button onClick={() => cardClicked(indFood)} id = ""> I am interested </Button>
-        </Card.Body>
-        </Card>
+      {allFood.map((indFood) => (
+        <div className="post_wrapper" key={indFood.id}>
+          <div class="header_wrapper">
+            <img src={indFood.imgData} className="header_img" />
+          </div>
+          <div className="content_text">
+            <p className="title">{indFood.name}</p>
+            <p className="txt">{indFood.desc}</p>
+            <div className="line_separator" ></div>
+            <div className="tile_footer">
+              <div className="date">From: {indFood.email}</div>
+              <a href="#" onClick={() => {cardClicked(indFood)}} className="pull-right readmore">Pick Up</a>
+            </div>
+          </div>
         </div>
-      )}
+      ))}
 
       {showPopUp && <Popup content={
         <>
@@ -110,7 +99,7 @@ const PickupList = () => {
           <p> Posted by: {popupCurrEmail} </p>
           <p> {popupCurrDesc} </p>
           <Button onClick={() => getFoodClicked()}> Reserve Food </Button>
-          {messageSent && <p> You have reserved this food! Check you text messages to get the address! </p>}
+          {messageSent && <p> You have reserved this food! Check your text messages to get the address. </p>}
         </>
         } handleClose={handlePopupClose} ></Popup>}
       

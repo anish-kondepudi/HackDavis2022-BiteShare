@@ -130,7 +130,7 @@ const PickupMap = () => {
   }, []);
 
   const handlePopupClose = (event) => {
-    if(setTextMessageSent) {
+    if(messageSent) {
       window.location.reload();
     }
     setShowPopup(false);
